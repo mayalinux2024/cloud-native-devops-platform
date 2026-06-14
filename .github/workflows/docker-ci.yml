@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build-test:
+  build-test-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,16 +15,24 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image
+      - name: Extract version
+        run: |
+          echo "VERSION=v1.0.${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Build Docker image (versioned)
         run: |
           cd 02-docker/app
-          docker build -t cloud-native-app:ci .
+          docker build -t cloud-native-app:${VERSION} -t cloud-native-app:latest .
 
       - name: Run container
         run: |
-          docker run -d -p 5000:5000 --name test-app cloud-native-app:ci
+          docker run -d -p 5000:5000 --name test-app cloud-native-app:${VERSION}
           sleep 5
 
       - name: Test health endpoint
         run: |
           curl --fail http://localhost:5000/health
+
+      - name: Simulate release step
+        run: |
+          echo "Image cloud-native-app:${VERSION} successfully built and tested"
