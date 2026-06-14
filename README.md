@@ -30,3 +30,8 @@ End-to-end DevOps portfolio project demonstrating Linux, Docker, AWS, Terraform,
 ### 🚧 Phase 3 — CI/CD with GitHub Actions (IN PROGRESS)
 - Basic Docker CI pipeline created
 - Automated Docker image build on push
+✔ Multi-stage Docker build implemented
+✔ Flask app containerized successfully
+✔ Health endpoint added (/health)
+✔ Image versioning (v1) completed
+✔ Container tested locally with curl
