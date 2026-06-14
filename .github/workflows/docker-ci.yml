@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +15,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image (no cache)
+      - name: Build Docker image
         run: |
           cd 02-docker/app
           docker build -t cloud-native-app:ci .
+
+      - name: Run container
+        run: |
+          docker run -d -p 5000:5000 --name test-app cloud-native-app:ci
+          sleep 5
+
+      - name: Test health endpoint
+        run: |
+          curl --fail http://localhost:5000/health
