@@ -1,0 +1,10 @@
+# Python environment
+venv/
+env/
+.venv/
+
+__pycache__/
+*.pyc
+
+# Docker noise
+*.log
