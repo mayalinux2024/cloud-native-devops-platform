@@ -169,7 +169,7 @@ Kubernetes phase is temporarily postponed.
 - Kubernetes Manifests
 - Production Deployment Workflow## Current Features
 
-Phase 6 — Kubernetes (Completed)
+## Phase 6 — Kubernetes (Completed)
 
 Topics Practiced
 
@@ -192,6 +192,7 @@ Kubernetes Deployment Lifecycle
 6. Diagnosed ImagePullBackOff
 7. Performed rollback
 8. Restored healthy service
+   
 ### Flask REST API
 
 - `/` application endpoint
@@ -326,4 +327,51 @@ All phases include:
   Security group rules (port 5000 + SSH access)
 
    <img width="737" height="371" alt="Security Group - Inbound Rule - port 5000" src="https://github.com/user-attachments/assets/f85edd1d-83fa-48ea-b1a8-9d970d2121a0" />
+
+### Phase 6 - Kubernetes
+- kind Create Cluster
+  <img width="756" height="418" alt="kind-create-cluster" src="https://github.com/user-attachments/assets/5e26d4dd-d6cc-474e-98b4-d3d6238482ab" />
+
+- kubectl get nodes
+  <img width="728" height="128" alt="kubectl-get-nodes" src="https://github.com/user-attachments/assets/4b995c4f-95e8-4956-a1b6-0dda1400f088" />
+
+- kubectl get podes kubectl get services
+  <img width="731" height="166" alt="kubectl-apply-get-pods-get-services" src="https://github.com/user-attachments/assets/9699680b-1b77-4376-8252-0405f634aa3c" />
+
+- kubectl port forward service
+  <img width="383" height="101" alt="kubectl port-forward-service" src="https://github.com/user-attachments/assets/1470b653-611d-472d-a7f2-7cb1d8b44974" />
+
+  <img width="842" height="134" alt="kubectl-port-forward" src="https://github.com/user-attachments/assets/7169dee4-69d5-4f5e-80e5-bc5ea03b3c47" />
+
+- kubectl scale (Horizontal scaling)
+  <img width="846" height="311" alt="kubectl-scale" src="https://github.com/user-attachments/assets/56180bf7-04f3-47b4-8dcc-a6a8c31011af" />
+
+- Real Load Balancing Test
+  <img width="848" height="143" alt="kubectl-real-load-balancing-test" src="https://github.com/user-attachments/assets/2b0ed807-273d-4df6-a90a-ef994fc16994" />
+
+  Send Multiple Requests
+  <img width="446" height="110" alt="kubectl-send-multiple-requests" src="https://github.com/user-attachments/assets/049e5cf0-6c66-46ed-a4a2-bba5c6a3e078" />
+
+- Kubernetes Rollout - rolled back
+  <img width="947" height="368" alt="kubernetes-rolled-back" src="https://github.com/user-attachments/assets/e67adafb-f382-4804-a9b6-3343f2b3a503" />
+
+  <img width="916" height="146" alt="kubernetes-rollout-rollback" src="https://github.com/user-attachments/assets/26fc509e-593f-4db5-b450-75ad8af365e9" />
+
+- Kubernetes Self Healing
+  <img width="829" height="119" alt="kubectl-self-healing" src="https://github.com/user-attachments/assets/cbe02ba1-e029-4d98-83ac-d71d957c20b1" />
+
+- Kubernetes scaling to 3 replicas
+  <img width="648" height="95" alt="kubernetes-deployment-scaling-to-3-replicas-self-healing" src="https://github.com/user-attachments/assets/28a88dcb-fb7c-40e4-a6cd-54f88d46231e" />
+
+
+
+
+  
+
+
+
+
+
+
+
 
