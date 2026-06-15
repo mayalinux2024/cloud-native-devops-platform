@@ -169,6 +169,29 @@ Kubernetes phase is temporarily postponed.
 - Kubernetes Manifests
 - Production Deployment Workflow## Current Features
 
+Phase 6 — Kubernetes (Completed)
+
+Topics Practiced
+
+- Kind cluster creation
+- Deployments
+- Services
+- Port forwarding
+- Scaling replicas
+- Self-healing pods
+- Rolling update troubleshooting
+- Rollback operations
+
+Kubernetes Deployment Lifecycle
+
+1. Created Kind cluster
+2. Deployed Flask application
+3. Exposed application via Service
+4. Scaled deployment to 3 replicas
+5. Simulated failed deployment using invalid image tag
+6. Diagnosed ImagePullBackOff
+7. Performed rollback
+8. Restored healthy service
 ### Flask REST API
 
 - `/` application endpoint
