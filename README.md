@@ -90,24 +90,84 @@ Deployable Container Image
 - Published latest release tag
 - Validated full CI/CD workflow from GitHub to Docker Hub
 
-### Phase 5 — Kubernetes (Next)
+## Phase 5 — AWS EC2 Deployment (Completed)
 
-Planned topics:
+### Objective
+Deploy the Dockerized Flask application to a real AWS EC2 server.
 
-- Kubernetes architecture
-- Pods
-- Deployments
-- Services
-- ReplicaSets
-- Rolling updates
-- Scaling applications
-- Health probes
-- Kubernetes manifests
-- Production deployment workflow
+### AWS Setup
+- Created AWS Free Tier account
+- Created IAM user for DevOps operations
+- Configured AWS CLI with IAM credentials
+- Launched Ubuntu EC2 instance (t3.micro)
+
+### Server Configuration
+- Connected to EC2 using SSH and PEM key authentication
+- Installed Docker Engine
+- Verified Docker service functionality
+
+### Application Deployment
+- Logged in to Docker Hub from EC2
+- Pulled production image from Docker Hub
+- Started Flask container on AWS EC2
+
+### Validation
+Verified application health using:
+
+```bash
+curl http://localhost:5000/health
+```
+
+Response:
+
+```json
+{"status":"healthy"}
+```
+
+### Skills Practiced
+- AWS EC2
+- IAM Users
+- Security Groups
+- SSH Authentication
+- Docker Deployment
+- Docker Hub Registry
+- Linux Administration
+- Cloud Troubleshooting
+
+### Result
+Successfully deployed and validated the Cloud Native DevOps Platform on AWS EC2 using a Docker container pulled from Docker Hub.
 
 ---
 
-## Current Features
+## Phase 6 — Kubernetes (Planned)
+
+### Current Status
+
+Kubernetes was initially attempted using:
+- Docker Desktop Kubernetes
+- Kind (local cluster)
+
+However, due to:
+- Resource limitations (EC2 t3.micro)
+- Stability issues with local cluster setup
+- System overload during testing
+
+Kubernetes phase is temporarily postponed.
+
+### Planned Topics
+
+- Kubernetes Architecture
+- Pods
+- Deployments
+- ReplicaSets
+- Services
+- ConfigMaps
+- Secrets
+- Health Probes
+- Rolling Updates
+- Scaling Applications
+- Kubernetes Manifests
+- Production Deployment Workflow## Current Features
 
 ### Flask REST API
 
