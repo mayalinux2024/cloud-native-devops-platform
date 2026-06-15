@@ -237,25 +237,30 @@ All phases include:
 ### Phase 1 — Linux Automation
 - `linux-health-check`
   System Health Report (terminal output)
-
+<img width="628" height="505" alt="linux-health-check" src="https://github.com/user-attachments/assets/6cd6d441-f3a4-4f52-9649-e1daed736922" />
 ---
 
 ### Phase 2 — Docker Containerization
 - `flask-app-running`
   Flask app running on port 5000 (browser)
+  
+  <img width="404" height="104" alt="flask-app-running" src="https://github.com/user-attachments/assets/cca6bbcd-894e-4252-ba6f-72f73bf396ac" />
 
 - `docker-container-running`
   Docker container run command + `docker ps`
+  <img width="940" height="103" alt="docker-container-running" src="https://github.com/user-attachments/assets/dbb0cab2-df27-43c6-ab34-135bc25fec71" />
 
 - `docker-upgraded-image-running`
   Updated Docker image running (v2) in browser
+<img width="851" height="227" alt="docker-v2" src="https://github.com/user-attachments/assets/3d4fbe23-b209-468a-9aa0-f5890300a112" />
 
 - `docker-health-image`
   Health endpoint (`/health`) showing healthy status
+  <img width="427" height="103" alt="docker-health-image" src="https://github.com/user-attachments/assets/54827e52-3b2c-4090-bddc-f5e6492841fc" />
 
 - `docker-vs`
   Comparison of Docker versions (v1 vs v2) + terminal output
-
+<img width="431" height="74" alt="docker-upgraded-image-running" src="https://github.com/user-attachments/assets/092824b7-2468-4016-ad76-2b2f0dc41bf8" />
 ---
 
 ### Phase 3 — CI/CD Pipeline
@@ -264,17 +269,16 @@ All phases include:
 ---
 
 ### Phase 4 — Docker Hub Registry
-- docker login succeeded
-- docker pull mayalinux/cloud-native-app
-- docker run container locally or on EC2
-- docker ps showing running container
-- curl /health validation
+
+<img width="458" height="410" alt="docker-hub-registry" src="https://github.com/user-attachments/assets/ab9a26cf-6b37-457a-87e5-d13b2f993570" />
 
 ---
 
 ### Phase 5 — AWS EC2 Deployment
 - `aws-ec2-docker-running`
   Flask app running on EC2 (browser health status)
+  
+<img width="329" height="92" alt="aws-Ec2-docker-running" src="https://github.com/user-attachments/assets/5fbb9ec5-dfe3-4417-832c-bff9e357c33a" />
 
 - `ubuntu-ec2-terminal`
   EC2 SSH session showing:
@@ -282,9 +286,16 @@ All phases include:
   - Docker run
   - Docker ps
   - curl /health
-
+  - 
+  <img width="853" height="425" alt="Ubuntu EC2 terminal" src="https://github.com/user-attachments/assets/75c5ee5c-ebc8-4232-a9a8-618f50b99164" />
+  
 - `aws-console`
   AWS EC2 instance running in console
 
+  <img width="707" height="342" alt="AWS Console" src="https://github.com/user-attachments/assets/27d8d9ba-b7b2-44ce-9bae-e464db9650b6" />
+
 - `security-group-inbound-rule-port-5000`
   Security group rules (port 5000 + SSH access)
+
+<img width="737" height="371" alt="Security Group - Inbound Rule - port 5000" src="https://github.com/user-attachments/assets/f85edd1d-83fa-48ea-b1a8-9d970d2121a0" />
+
