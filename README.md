@@ -232,34 +232,59 @@ All phases include:
 ---
 
 ## Screenshots
+> Note: Screenshots represent key milestones captured during development. Some intermediate automation outputs (Phase 1 CI artifacts) were validated via terminal logs but not individually screenshoted.
 
 ### Phase 1 — Linux Automation
-- Bash script execution in WSL terminal
-- CPU, memory, disk monitoring output
+- `linux-health-check`
+  System Health Report (terminal output)
+
+---
 
 ### Phase 2 — Docker Containerization
-- Docker build output
-- Running Flask container (`docker ps`)
-- Browser showing `/health` endpoint
+- `flask-app-running`
+  Flask app running on port 5000 (browser)
+
+- `docker-container-running`
+  Docker container run command + `docker ps`
+
+- `docker-upgraded-image-running`
+  Updated Docker image running (v2) in browser
+
+- `docker-health-image`
+  Health endpoint (`/health`) showing healthy status
+
+- `docker-vs`
+  Comparison of Docker versions (v1 vs v2) + terminal output
+
+---
 
 ### Phase 3 — CI/CD Pipeline
-- GitHub Actions workflow run (successful build)
-- Docker build and test logs
-- CI pipeline completion status
+*(covered via GitHub Actions logs — no screenshot captured)*
+
+---
 
 ### Phase 4 — Docker Hub Registry
-- Docker Hub repository showing pushed images
-- Versioned tags (v1.0.x, latest)
-- Image pull confirmation logs
+- docker login succeeded
+- docker pull mayalinux/cloud-native-app
+- docker run container locally or on EC2
+- docker ps showing running container
+- curl /health validation
+
+---
 
 ### Phase 5 — AWS EC2 Deployment
-- EC2 instance running in AWS console
-- SSH connection from WSL terminal
-- `docker ps` showing running container
-- `/health` endpoint response from EC2
-- Browser access via EC2 public IP
+- `aws-ec2-docker-running`
+  Flask app running on EC2 (browser health status)
 
-### Phase 6 — Kubernetes (Experiment)
-- Kind cluster creation output
-- `kubectl version` output
-- Cluster logs / initial setup attempts
+- `ubuntu-ec2-terminal`
+  EC2 SSH session showing:
+  - Docker pull
+  - Docker run
+  - Docker ps
+  - curl /health
+
+- `aws-console`
+  AWS EC2 instance running in console
+
+- `security-group-inbound-rule-port-5000`
+  Security group rules (port 5000 + SSH access)
