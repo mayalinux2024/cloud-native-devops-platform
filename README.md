@@ -192,6 +192,84 @@ Kubernetes Deployment Lifecycle
 6. Diagnosed ImagePullBackOff
 7. Performed rollback
 8. Restored healthy service
+
+## Phase 7: Terraform – Infrastructure as Code (AWS EC2)
+
+In this phase, we automated cloud infrastructure provisioning using Terraform.
+
+## Objective 
+Provision an AWS EC2 instance and security group using Infrastructure as Code (IaC) instead of manual AWS Console setup.
+
+---
+
+### What was implemented
+- Configured Terraform AWS Provider (`hashicorp/aws`)
+- Defined infrastructure using declarative `.tf` files
+- Created:
+  - EC2 instance (`t3.micro`)
+  - Security Group (SSH + Flask port 5000)
+- Used Ubuntu AMI in `us-east-1`
+- Automated Docker installation via `user_data`
+- Deployed Flask application container automatically
+
+---
+
+### Terraform Resources
+#### Provider Configuration
+- AWS Provider configured for region: `us-east-1`
+
+#### EC2 Instance
+- Instance Type: `t3.micro`
+- AMI: Ubuntu 22.04 (free-tier eligible)
+- Security Group: `devops-sg`
+
+#### Security Group Rules
+- SSH: Port 22
+- Flask App: Port 5000
+
+---
+
+### Deployment Flow
+1. `terraform init` – Initialize provider plugins
+2. `terraform plan` – Preview infrastructure changes
+3. `terraform apply` – Provision AWS resources
+4. EC2 instance automatically:
+   - Installs Docker
+   - Pulls Flask image
+   - Runs container on port 5000
+
+---
+
+### Output
+- EC2 Public IP generated dynamically
+- Flask app accessible via:
+http://34.235.152.3:5000/health
+
+
+---
+
+### Key Learnings
+- Infrastructure as Code (IaC) fundamentals
+- AWS EC2 provisioning automation
+- Security group configuration
+- Terraform state management
+- Handling real-world issues (AMI mismatch, instance type restrictions)
+
+---
+
+### Issues Solved
+- Fixed invalid instance type (resolved Free Tier compatibility)
+- Resolved large `.terraform` artifacts in Git
+- Cleaned repository using `git filter-repo`
+- Managed AWS authentication and region configuration
+
+---
+
+### Evidence
+- Terraform init success screenshot
+- Terraform apply success screenshot
+- EC2 instance running in AWS Console
+- Flask app health check response
    
 ### Flask REST API
 
