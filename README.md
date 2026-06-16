@@ -876,15 +876,52 @@ All phases include:
 
   <img width="905" height="325" alt="terraform-apply-matched-region-new-ami-new-public_ip-sucessfull-SSH" src="https://github.com/user-attachments/assets/7e5991ac-6022-4bd4-ad54-6bd4fd4d7fde" />
 
-### Phase 8 Ansible
+### Phase 8 Ansible connectivity test
 
 - inventory.ini with Terraform new public_ip
 
   <img width="876" height="44" alt="ansible-inventory-with-terraform-new-public_ip" src="https://github.com/user-attachments/assets/aaf2097a-370f-4d76-b34e-8a15ec2641f7" />
 
-- Ansible Success
+- Ansible connectivity test
+
+  ansible -i inventory.ini ec2 -m ping
+
+  Result: SUCCESS => pong
 
   <img width="839" height="115" alt="ansible-success" src="https://github.com/user-attachments/assets/7c71c7de-3d24-4d97-86cb-d41e216a923e" />
+
+- Successful playbook execution
+
+  ansible-playbook -i inventory.ini playbook.yml
+
+  Result:
+  
+  PLAY RECAP
+  ec2-instance : ok=6 changed=4 unreachable=0 failed=0
+
+  <img width="948" height="368" alt="ansible-successful-playbook-execution" src="https://github.com/user-attachments/assets/3566645b-e266-42db-aa4e-a2a6789fb2cd" />
+
+### Phase 9: Continuous Deployment (CD) with GitHub Actions
+
+- Latest GitHub Actions run is green after adding the deployment job. This means:
+  
+  -Build succeeded
+  -Health check succeeded
+  -Docker image was pushed
+  -Deployment job completed successfully
+
+- Verified by:
+  
+    curl http://16.171.20.72:5000/health
+
+    {"status":"healthy"}
+
+    <img width="839" height="56" alt="workflow-deployment-pipeline-is-functioning" src="https://github.com/user-attachments/assets/a6a127eb-879e-4365-92f8-082cd7f3b870" />
+
+
+
+
+
   
 
 
