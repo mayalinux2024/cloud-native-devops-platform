@@ -45,3 +45,30 @@ jobs:
         run: |
           docker push mayalinux/cloud-native-app:${VERSION}
           docker push mayalinux/cloud-native-app:latest
+
+  deploy:
+    needs: build-test-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Create SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/devops.pem
+          chmod 600 ~/.ssh/devops.pem
+
+      - name: Deploy with Ansible
+        run: |
+          ansible-playbook \
+            -i "${{ secrets.EC2_HOST }}," \
+            05-ansible/flask-deploy/playbook.yml \
+            -u ${{ secrets.EC2_USER }} \
+            --private-key ~/.ssh/devops.pem

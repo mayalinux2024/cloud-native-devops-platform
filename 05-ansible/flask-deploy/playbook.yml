@@ -22,12 +22,14 @@
       docker_image:
         name: mayalinux/cloud-native-app:latest
         source: pull
+        force_source: true
 
     - name: Run Flask container
       docker_container:
         name: flask-app
         image: mayalinux/cloud-native-app:latest
         state: started
+        recreate: true
         restart_policy: always
         ports:
           - "5000:5000"
