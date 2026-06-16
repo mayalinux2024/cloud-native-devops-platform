@@ -685,13 +685,41 @@ All phases include:
 
 - Terraform/SSH issue ran into an AWS-region/key-pair mismatch issue
 
-- Terraform successfully provisioned AWS infrastructure. Additional improvements such as key pair management and automated application bootstrap were identified as future enhancements. The Terraform deployment can be revisited later as an enhancement,
+- Terraform successfully provisioned AWS infrastructure. Additional improvements such as key pair management and automated application bootstrap were identified as future enhancements. The Terraform deployment can be revisited later as an enhancement.
 
+### Phase 7 Terraform (Continued)
+- Instances regions Are Matched, key was automatically attached to  "terraform-devops-server" instance, "eu-north-1" region was updated in provider.tf and key_name = "devops" was added in ec2.tf , SSH issue resolved.
 
+- Updated ec2.tf with key (same AMI)
+  
+  <img width="633" height="255" alt="terraform-updated-ec2-with-key-same-ami" src="https://github.com/user-attachments/assets/7c99d03e-a04c-4675-90fe-aaaa19163fc6" />
 
+- Updated provider.tf with region
 
+  <img width="671" height="182" alt="terraform-updated-provider-with-region" src="https://github.com/user-attachments/assets/31d4b4c0-a578-4d54-8ffb-cd26a4dbe6b5" />
 
+- Update AMI region to match root's
 
+  <img width="737" height="113" alt="update-AMI-with-matched-region-with-root" src="https://github.com/user-attachments/assets/0789904e-f138-4c7f-8a45-ec3d572c52bd" />
+
+- Updated ec2.tf with new AMI
+
+  <img width="638" height="251" alt="terraform-updated-ec2-new-ami" src="https://github.com/user-attachments/assets/b7654501-7d79-4d3c-b7cc-896da962115f" />
+
+- Terraform apply - Matched Region - new AMI - new public_ip - Successfull SSH
+
+  <img width="905" height="325" alt="terraform-apply-matched-region-new-ami-new-public_ip-sucessfull-SSH" src="https://github.com/user-attachments/assets/7e5991ac-6022-4bd4-ad54-6bd4fd4d7fde" />
+
+### Phase 8 Ansible
+
+- inventory.ini with Terraform new public_ip
+
+  <img width="876" height="44" alt="ansible-inventory-with-terraform-new-public_ip" src="https://github.com/user-attachments/assets/aaf2097a-370f-4d76-b34e-8a15ec2641f7" />
+
+- Ansible Success
+
+  <img width="839" height="115" alt="ansible-success" src="https://github.com/user-attachments/assets/7c71c7de-3d24-4d97-86cb-d41e216a923e" />
+  
 
 
 
