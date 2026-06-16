@@ -1,0 +1,33 @@
+- name: Deploy Flask App on EC2
+  hosts: ec2
+  become: yes
+
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull Flask Docker image
+      docker_image:
+        name: mayalinux/cloud-native-app:latest
+        source: pull
+
+    - name: Run Flask container
+      docker_container:
+        name: flask-app
+        image: mayalinux/cloud-native-app:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "5000:5000"

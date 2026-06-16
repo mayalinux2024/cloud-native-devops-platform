@@ -270,9 +270,187 @@ http://34.235.152.3:5000/health
 - Terraform apply success screenshot
 - EC2 instance running in AWS Console
 - Flask app health check response
-   
-### Flask REST API
 
+## Phase 7 Cont. Terraform 
+Since we faced issues with Terraform deployment (note below screenshots section) due to AWS-region/key-pair mismatch. We matched the new terraform instance "terraform-devops-server" to the same region of EC2 instance "devops-flask-server". Thus, we were able to add this instance key pair to terraform instance. So, we successfully ran ssh -i ~/aws-keys/devops.pem ubuntu@16.171.20.72.    
+
+# Terraform (Infrastructure Provisioning)
+## Overview
+
+In this phase, Terraform is used strictly for **infrastructure provisioning on AWS**. The goal is to separate infrastructure creation from application deployment to follow real-world DevOps best practices.
+
+Terraform is configured to deploy resources in a single consistent AWS region (`eu-north-1`) to avoid region mismatch issues experienced earlier.
+
+## Terraform Responsibilities
+
+Terraform is now responsible ONLY for:
+
+- Creating EC2 instances on AWS
+- Creating and managing Security Groups
+- Attaching SSH key pairs to EC2 instances
+- Allocating networking components (public IP, VPC defaults)
+- Ensuring reproducible infrastructure across environments
+
+## What Terraform DOES NOT do anymore
+
+To maintain clean separation of concerns, Terraform no longer handles:
+
+- Application installation
+- Docker installation
+- Application deployment (Flask app)
+- Container runtime configuration
+
+All `user_data` logic has been reduced to minimal or removed to avoid mixing infrastructure and application layers.
+
+## Key Configuration Decisions
+
+- AWS Region standardized to: `eu-north-1`
+- Ubuntu AMI is region-specific and selected dynamically
+- SSH key pair (`devops`) is attached at instance creation
+- Security Group allows:
+  - SSH (port 22)
+  - Flask application access (port 5000)
+
+## Final Terraform Architecture
+
+Terraform now produces:
+
+- EC2 instance (Ubuntu)
+- Security Group with required ports
+- SSH access enabled via key pair
+- Public IP output for downstream tools (Ansible)
+
+## Key Learning Outcome
+
+Terraform is strictly an **Infrastructure as Code (IaC)** tool in this architecture.
+
+It ensures:
+
+- Repeatable infrastructure
+- Predictable cloud provisioning
+- No application-level logic embedded in infrastructure code
+
+
+---
+
+# Phase 8 — Ansible (Configuration Management & Deployment)
+
+## Overview
+
+In this phase, Ansible is introduced as the **configuration management and application deployment tool**.
+
+It connects to Terraform-created EC2 instances and performs all system configuration and application deployment tasks automatically.
+
+This phase completes the separation of responsibilities between infrastructure and application layers.
+
+## Ansible Responsibilities
+
+Ansible is now responsible ONLY for:
+
+- Connecting to EC2 via SSH
+- Installing system dependencies (Docker)
+- Starting and configuring services
+- Pulling Docker images from Docker Hub
+- Running application containers
+- Ensuring consistent deployment state
+
+## What Ansible DOES NOT do
+
+Ansible does NOT:
+
+- Create infrastructure (handled by Terraform)
+- Provision EC2 instances
+- Manage AWS resources
+- Define networking or security groups
+
+## Deployment Workflow
+
+Ansible performs the following automated steps:
+
+1. Connects to EC2 instance using SSH key (`devops.pem`)
+2. Updates system packages
+3. Installs Docker
+4. Starts and enables Docker service
+5. Pulls Flask application Docker image:
+   - `mayalinux/cloud-native-app:latest`
+6. Runs the Flask container:
+   - Exposes application on port 5000
+   - Ensures container restarts automatically
+
+## Inventory Configuration
+
+Ansible uses a static inventory file pointing to Terraform output:
+
+- EC2 public IP is dynamically updated after Terraform apply
+- SSH access is configured using the same key pair as Terraform (`devops.pem`)
+
+## Final Ansible Architecture
+
+Ansible now handles:
+
+- EC2 configuration
+- Application runtime setup
+- Docker container deployment
+- Application lifecycle management
+
+## Key Learning Outcome
+
+Ansible acts as a **Configuration Management + Deployment Automation tool** in this architecture.
+
+It ensures:
+
+- Reproducible server configuration
+- Consistent application deployment
+- Elimination of manual SSH-based setup
+- Clean separation from infrastructure provisioning
+
+
+---
+
+# Final System Architecture (Target State)
+
+This project now follows a real-world DevOps architecture:
+
+Terraform → EC2 + Security Groups + SSH Key (Infrastructure Layer)
+
+Ansible → Docker Installation + Application Deployment (Configuration Layer)
+
+CI/CD (Next Phase) → Automated Build & Deployment Pipeline (Automation Layer)
+
+
+---
+
+# Key Design Shift (Important DevOps Concept)
+
+This project evolved from a mixed automation model into a **clean separation of concerns architecture**:
+
+Before:
+
+- Terraform handled infrastructure + partial app deployment (via user_data)
+- Manual SSH required for setup
+- Mixed responsibilities between tools
+
+After refactoring:
+
+- Terraform → Pure infrastructure provisioning only
+- Ansible → Full application deployment and configuration
+- No overlapping responsibilities
+- No duplicate Docker execution logic
+
+
+---
+
+# Summary
+
+This separation provides:
+
+- Cleaner architecture
+- Easier debugging
+- Production-grade DevOps structure
+- Scalability for CI/CD integration
+- Reusable infrastructure and deployment pipelines
+
+### Flask REST API
 - `/` application endpoint
 - `/health` monitoring endpoint
 
