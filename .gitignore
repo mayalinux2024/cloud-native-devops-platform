@@ -8,3 +8,10 @@ __pycache__/
 
 # Docker noise
 *.log
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+*.pem
