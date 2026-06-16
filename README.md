@@ -271,8 +271,19 @@ http://34.235.152.3:5000/health
 - EC2 instance running in AWS Console
 - Flask app health check response
 
-## Phase 7 Cont. Terraform 
-Since we faced issues with Terraform deployment (note below screenshots section) due to AWS-region/key-pair mismatch. We matched the new terraform instance "terraform-devops-server" to the same region of EC2 instance "devops-flask-server". Thus, we were able to add this instance key pair to terraform instance. So, we successfully ran ssh -i ~/aws-keys/devops.pem ubuntu@16.171.20.72.    
+###### Architecture Refactor Note
+
+The initial Terraform implementation combined infrastructure provisioning and application deployment through `user_data`.
+
+During later phases, the project was refactored to follow a cleaner separation of responsibilities:
+
+- Terraform became responsible only for infrastructure provisioning.
+- Ansible became responsible for server configuration and application deployment.
+
+The original implementation remains documented below as part of the project's learning progression and troubleshooting journey. The current architecture is described in "Phase 7 Cont. Terraform" and "Phase 8 — Ansible".
+
+## Phase 7 Continue Terraform 
+Since we faced issues with Terraform deployment (note below screenshots section) due to AWS-region/key-pair mismatch. We matched the new terraform instance "terraform-devops-server" to the same region of EC2 instance "devops-flask-server". And updated AMI to eu-north-1. As a result, we were able to attach the existing key pair to terraform instance. So, we successfully ran ssh -i ~/aws-keys/devops.pem ubuntu@16.171.20.72.
 
 # Terraform (Infrastructure Provisioning)
 ## Overview
@@ -449,6 +460,161 @@ This separation provides:
 - Production-grade DevOps structure
 - Scalability for CI/CD integration
 - Reusable infrastructure and deployment pipelines
+
+## Phase 9 — Continuous Deployment with GitHub Actions
+
+### Overview
+
+In this phase, the existing GitHub Actions CI pipeline was extended into a complete CI/CD workflow.
+
+The pipeline now performs both Continuous Integration (CI) and Continuous Deployment (CD) by automatically deploying the application to AWS EC2 after a successful build and test cycle.
+
+This phase completes the automation chain from source code commit to production deployment.
+
+### Objective
+
+Automate application deployment so that every successful push to the main branch results in:
+
+- Docker image build
+- Automated testing
+- Docker Hub image publication
+- Automatic deployment to AWS EC2 using Ansible
+
+### CI/CD Workflow
+
+The deployment process now follows this sequence:
+
+```text
+Developer Push
+
+↓
+
+GitHub Actions
+
+↓
+
+Build Docker Image
+
+↓
+
+Container Health Test
+
+↓
+
+Push Image to Docker Hub
+
+↓
+
+Ansible Deployment
+
+↓
+
+AWS EC2
+
+↓
+
+Docker Container Updated
+```
+
+### GitHub Actions Responsibilities
+
+GitHub Actions is responsible for:
+
+- Detecting code changes on the main branch
+- Building Docker images
+- Executing automated health tests
+- Publishing images to Docker Hub
+- Triggering automated deployment after successful validation
+
+### Deployment Automation
+
+A second workflow job named `deploy` was added to the existing pipeline.
+
+After the build-and-test stage completes successfully, GitHub Actions:
+
+- Installs Ansible on the runner
+- Creates a temporary SSH key from GitHub Secrets
+- Connects securely to the AWS EC2 instance
+- Executes the Ansible playbook automatically
+
+### GitHub Secrets Used
+
+The deployment workflow uses GitHub Actions Secrets to securely store deployment credentials.
+
+Configured secrets:
+
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
+- `EC2_HOST`
+- `EC2_USER`
+- `EC2_SSH_KEY`
+
+This avoids storing sensitive credentials inside the repository.
+
+### Integration with Ansible
+
+GitHub Actions delegates deployment responsibilities to Ansible.
+
+Ansible then:
+
+- Connects to EC2
+- Ensures Docker is installed
+- Pulls the latest Docker image from Docker Hub
+- Recreates the Flask container
+- Maintains the desired deployment state
+
+### Final Responsibilities by Tool
+
+#### Terraform
+
+- Creates EC2 infrastructure
+- Creates Security Groups
+- Attaches SSH key pairs
+- Provides public IP outputs
+
+#### Ansible
+
+- Configures EC2 instances
+- Installs Docker
+- Pulls container images
+- Deploys and manages application containers
+
+#### GitHub Actions
+
+- Builds application artifacts
+- Executes automated testing
+- Publishes Docker images
+- Triggers automated deployment
+
+### Key Learning Outcomes
+
+- Continuous Integration (CI)
+- Continuous Deployment (CD)
+- GitHub Actions workflow automation
+- Secure secret management
+- Automated infrastructure-to-application delivery
+- Integration between Terraform, Ansible, Docker, and AWS
+
+### Result
+
+The project now supports a complete automated delivery pipeline.
+
+A code push to the main branch automatically:
+
+1. Builds the Docker image
+2. Tests the application
+3. Pushes the image to Docker Hub
+4. Deploys the latest version to AWS EC2 using Ansible
+
+No manual deployment steps are required after a successful commit.
+
+### Evidence
+
+- Successful GitHub Actions workflow run
+- Docker image published to Docker Hub
+- Successful Ansible deployment execution
+- Healthy Flask application response after deployment
+- Automated end-to-end CI/CD pipeline validation
 
 ### Flask REST API
 - `/` application endpoint
