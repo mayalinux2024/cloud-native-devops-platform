@@ -474,6 +474,7 @@ All phases include:
   <img width="482" height="476" alt="terraform-apply-success-2" src="https://github.com/user-attachments/assets/9f922354-1dc1-4045-b70f-dedff733cab0" />
 
   -Public_IP
+  
   <img width="562" height="283" alt="terraform-apply-success-3-public_ip" src="https://github.com/user-attachments/assets/f6792154-6a50-4174-9094-cdbb14c6ecdb" />
 
 - SSH Login Success
