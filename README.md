@@ -492,6 +492,8 @@ All phases include:
 
   <img width="763" height="374" alt="terraform-security-group" src="https://github.com/user-attachments/assets/44983014-fae0-4377-b55f-1953239d060b" />
 
+  ---
+  
   <img width="767" height="323" alt="terraform-security-group-devops-sg" src="https://github.com/user-attachments/assets/09ccb0b6-10e1-4209-9585-1dcd25fbb9ce" />
 
 - Terraform apply (2nd time)
@@ -499,6 +501,7 @@ All phases include:
   <img width="917" height="472" alt="terraform-second-apply-success-1" src="https://github.com/user-attachments/assets/0f166802-2c32-4610-bd94-8ed57ad02076" />
 
   - Public_IP
+    
     <img width="605" height="230" alt="terraform-second-apply-success-2-public_ip" src="https://github.com/user-attachments/assets/bc997b6b-af5f-406e-a7f6-c81570ef378f" />
 
 - Terraform/SSH issue ran into an AWS-region/key-pair mismatch issue
