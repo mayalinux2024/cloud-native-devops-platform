@@ -451,6 +451,69 @@ All phases include:
   
   <img width="648" height="95" alt="kubernetes-deployment-scaling-to-3-replicas-self-healing" src="https://github.com/user-attachments/assets/28a88dcb-fb7c-40e4-a6cd-54f88d46231e" />
 
+### Phase 7 Terraform
+
+- Terraform init
+  
+  <img width="663" height="324" alt="terraform-init" src="https://github.com/user-attachments/assets/00f2c5bf-8b3f-4fb8-9652-33998f91a58f" />
+
+- Terraform plan
+
+  <img width="916" height="470" alt="terraform-plan-1" src="https://github.com/user-attachments/assets/da5b7727-4fd1-4306-9512-a53fa2d68ceb" />
+
+  <img width="496" height="476" alt="terraform-plan-2" src="https://github.com/user-attachments/assets/5aba4e84-bd1f-42b3-b3c6-fcbd5fb79f3e" />
+
+  <img width="407" height="461" alt="terraform-plan-3" src="https://github.com/user-attachments/assets/5915dd9f-160a-422f-affd-c7811ade8e59" />
+
+  <img width="884" height="474" alt="terraform-plan-4" src="https://github.com/user-attachments/assets/b4d9bbec-cdc6-404d-9360-c37425263693" />
+
+- Terraforom apply (1st time)
+
+  <img width="931" height="460" alt="terraform-apply-success-1" src="https://github.com/user-attachments/assets/b22c04b5-0965-4189-8e9b-850102cfd416" />
+
+  <img width="482" height="476" alt="terraform-apply-success-2" src="https://github.com/user-attachments/assets/9f922354-1dc1-4045-b70f-dedff733cab0" />
+
+  -Public_IP
+  <img width="562" height="283" alt="terraform-apply-success-3-public_ip" src="https://github.com/user-attachments/assets/f6792154-6a50-4174-9094-cdbb14c6ecdb" />
+
+- SSH Login Success
+
+  <img width="910" height="451" alt="SSH-login-success" src="https://github.com/user-attachments/assets/ff60da10-492b-48dd-8ab2-d1702759c9c8" />
+
+- EC2 uptime
+
+  <img width="432" height="49" alt="Ec2-uptime" src="https://github.com/user-attachments/assets/933d3574-3b70-415a-af89-55ffe9ca203d" />
+
+- EC2 Instance: "terraform-deveops-server"
+
+  <img width="840" height="443" alt="ec2-instance-terraform-devops-server" src="https://github.com/user-attachments/assets/77daa5ff-de49-456a-8cc2-c312373eb34a" />
+
+- Instance Security Group
+
+  <img width="763" height="374" alt="terraform-security-group" src="https://github.com/user-attachments/assets/44983014-fae0-4377-b55f-1953239d060b" />
+
+  <img width="767" height="323" alt="terraform-security-group-devops-sg" src="https://github.com/user-attachments/assets/09ccb0b6-10e1-4209-9585-1dcd25fbb9ce" />
+
+- Terraform apply (2nd time)
+
+  <img width="917" height="472" alt="terraform-second-apply-success-1" src="https://github.com/user-attachments/assets/0f166802-2c32-4610-bd94-8ed57ad02076" />
+
+  - Public_IP
+    <img width="605" height="230" alt="terraform-second-apply-success-2-public_ip" src="https://github.com/user-attachments/assets/bc997b6b-af5f-406e-a7f6-c81570ef378f" />
+
+- Terraform/SSH issue ran into an AWS-region/key-pair mismatch issue
+
+- Terraform successfully provisioned AWS infrastructure. Additional improvements such as key pair management and automated application bootstrap were identified as future enhancements. The Terraform deployment can be revisited later as an enhancement,
+
+
+
+
+
+
+
+
+
+
 
 
 
